@@ -122,7 +122,7 @@
 <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">output_tiles</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="reference/figures/naip.png" width="100%"></p>
 <p>Once downloaded, these images are in standard GeoTIFF or PNG formats and can be used as expected with other utilities:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>raster<span class="op">::</span><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">raster</span>(output_tiles[[<span class="dv">1</span>]][[<span class="dv">1</span>]]))elev</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">raster<span class="op">::</span><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">raster</span>(output_tiles[[<span class="dv">1</span>]][[<span class="dv">1</span>]]))elev</a></code></pre></div>
 <p><img src="reference/figures/elevation.png" width="100%"></p>
 <p>Additionally, terrainr provides functions to transform these tiles into RAW images ready to be imported into the Unity rendering engine, allowing you to fly or walk through your downloaded data sets in 3D or VR:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
@@ -180,10 +180,10 @@
 <p>You can install the development version of terrainr from <a href="https://github.com/mikemahoney218/terrainr">GitHub</a> with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mikemahoney218/terrainr"</span><span class="op">)</span></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mikemahoney218/terrainr"</span><span class="op">)</span></pre></div>
 <p>If you’re planning on using <code><a href="reference/raster_to_raw_tiles.html">raster_to_raw_tiles()</a></code>, you’ll also need to install the development version of the <code>magick</code> package for the time being:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ropensci/magick"</span><span class="op">)</span></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ropensci/magick"</span><span class="op">)</span></pre></div>
 </div>
 </div>
   </div>
