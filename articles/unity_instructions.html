@@ -88,7 +88,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="unity_instructions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Importing terrainr tiles into Unity</h1>
@@ -129,29 +129,29 @@
        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>The one thing I’ll point out in the code is that we’re providing two sets of arguments to each of our <code>raster_to_raw_tiles</code> runs: first we provide a heightmap with the argument <code>raw = TRUE</code>, then we rerun the function with our orthoimage and <code>raw = FALSE</code>. The reason here is that we’ll import these objects into Unity differently, so they need to be saved out in different file formats.</p>
 <p>Once that code finishes running, you should have about this many files:</p>
-<p><img src="files.jpg" width="759"></p>
+<p><img src="files.jpg"><!-- --></p>
 <p>We can safely ignore or delete all the XML files. Additionally, you’ll notice that you have 3 black PNG files, which are only a few kB in size (versus the roughly 75 MB average of the other files). Our input files weren’t exactly evenly divisible by 4097, so the few extra pixels at the end got split into their own files; feel free to delete those (and their matching .raw counterparts) as well.</p>
 <p>So now we’re down to 16 files. Let’s go ahead and open a new Unity project now:</p>
-<p><img src="new_unity.jpg" width="473"></p>
+<p><img src="new_unity.jpg"><!-- --></p>
 <p>Which will spit us out into a brand new scene. Note that you can fly around in the scene by right-clicking and using WASD to navigate, and you can fly faster by holding shift at the same time.</p>
-<p><img src="new_scene.jpg" width="858"></p>
+<p><img src="new_scene.jpg"><!-- --></p>
 <p>Under “Game Object” in the top menu bar, go into the “3D Object” submenu and then click “Terrain” to add a new, blank terrain object to our scene. While the terrain is selected (indicated by an orange border; if it isn’t selected, just click on it) click the “Terrain Settings” menu (the gear icon on the far right) in the “Inspector” menu in the right-hand pane.</p>
 <p>Almost all the way at the bottom of “Terrain Settings” is the “Import Raw” button. By clicking that and then selecting our first heightmap – let’s start with <code>mt_marcy_1_1.raw</code> – we can start importing it into Unity. Set resolution, X, and Z to the side_length argument in <code>raster_to_raw_tiles</code>, and Y to the maximum elevation across all your tiles – if you don’t know it, you can find it via <code>raster::cellStats(raster::raster("your_merged_heightmap.tif"), "max)</code>. In our case, it’s about 1629.</p>
-<p><img src="heightmap_import.jpg" width="406"></p>
+<p><img src="heightmap_import.jpg"><!-- --></p>
 <p>Hit “Import” and voila, you have a terrain tile!</p>
 <p>To import the rest, we first need to create new terrain objects. I do this by going to the “Create Neighbor Terrains” menu (under Inspector, the icon of mountains with a plus sign all the way to the left) and adding terrain from there.</p>
 <p>The trick here is that, when the red “X” cone points straight left and the blue “Z” cone points straight down, tiles are named following the format <code>prefix_x_y.raw</code> where <code>x</code> and <code>y</code> are the tile’s position in a grid. Our <code>mt_marcy_1_1.raw</code> tile is the top left of the grid, with the rest of the tiles being arranged as so:</p>
-<p><img src="tile_arrangement.jpg" width="523"></p>
+<p><img src="tile_arrangement.jpg"><!-- --></p>
 <p>You’ll have to re-input the resolution for each tile, but X, Y, and Z stay the same. Go ahead and import the rest of our tiles.</p>
 <p>Once all your tiles are imported, right click in the “Assets” pane at the bottom of the page and select “Import New Asset”. Go ahead and import all of the 9 PNG files we produced earlier.</p>
 <p>Now select that (1,1) terrain tile and go to the “Paint Terrain” menu in the Inspector, next to the Create Neighbor Terrain menu. Under “Edit Terrain Layers”, click “Create Layer”. The image tiles are named following the same pattern as the elevation tiles, so go ahead and select the (1,1) image. Double click the image to confirm.</p>
-<p><img src="create_layer.jpg" width="822"></p>
+<p><img src="create_layer.jpg"><!-- --></p>
 <p>Back in the Inspector, click the image that appeared under “Terrain Layers” and then update the Size values to the same side length as the elevation tiles. This will stretch the texture out so it drapes properly over the landscape.</p>
-<p><img src="resize_layer.jpg" width="178"></p>
+<p><img src="resize_layer.jpg"><!-- --></p>
 <p>You’ll want to repeat this for each tile – but make sure you click off the tile you just painted before clicking the next one! Otherwise, you’ll paint that tile with the same orthoimage as you just applied; to undo this, click the offending image under Terrain Layers, then “Edit Terrain Layers,” then “Remove Layer”.</p>
 <p>And just like that, your map is painted! You’re now able to fly through your creation or use the rest of Unity’s features to turn your landscape into a full 3D experience.</p>
-<p><img src="finished.jpg" width="308"></p>
-<p><img src="finished_again.jpg" width="483"></p>
+<p><img src="finished.jpg"><!-- --></p>
+<p><img src="finished_again.jpg"><!-- --></p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -167,7 +167,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -210,12 +210,6 @@
       <tr>
         
         <td>
-          <p><code><a href="add_bbox_buffer.html">add_bbox_buffer()</a></code> </p>
-        </td>
-        <td><p>Add a uniform buffer around a bounding box</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="convert_distance.html">convert_distance()</a></code> </p>
         </td>
         <td><p>Convert distance into meters</p></td>
@@ -228,15 +222,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="get_bbox_centroid.html">get_bbox_centroid()</a></code> </p>
+          <p><code><a href="export_bounding_box.html">export_bounding_box()</a></code> </p>
         </td>
-        <td><p>Get the great-circle centroid for a given bounding box.</p></td>
+        <td><p>Convert a terrainr_bounding_box object to a base list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="export_coord_pair.html">export_coord_pair()</a></code> </p>
+        </td>
+        <td><p>Convert a terrainr_coordinate_pair object to a base vector.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="get_coord_bbox.html">get_coord_bbox()</a></code> </p>
         </td>
         <td><p>Get bounding box for set of coordinate points.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_tiles.html">get_tiles()</a></code> </p>
+        </td>
+        <td><p>A user-friendly way to get USGS National Map data tiles for an area</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="merge_rasters.html">merge_rasters()</a></code> </p>
+        </td>
+        <td><p>Merge multiple raster files into a single raster</p></td>
       </tr><tr>
         
         <td>
@@ -249,6 +261,44 @@
           <p><code><a href="rad_to_deg.html">rad_to_deg()</a></code> </p>
         </td>
         <td><p>Convert radians to degrees</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="raster_to_raw_tiles.html">raster_to_raw_tiles()</a></code> </p>
+        </td>
+        <td><p>Crop a raster and convert the output tiles into new formats.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="terrainr_bounding_box-class.html">terrainr_bounding_box-class</a></code> </p>
+        </td>
+        <td><p>S4 class for bounding boxes in the format expected by <code>terrainr</code>
+functions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="terrainr_bounding_box.html">terrainr_bounding_box()</a></code> </p>
+        </td>
+        <td><p>Construct a terrainr_bounding_box object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="terrainr_coordinate_pair-class.html">terrainr_coordinate_pair-class</a></code> </p>
+        </td>
+        <td><p>S4 class for coordinate points in the format expected by
+<code>terrainr</code> functions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="terrainr_coordinate_pair.html">terrainr_coordinate_pair()</a></code> </p>
+        </td>
+        <td><p>Construct a terrainr_coordinate_pair object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_bbox_centroid.html">get_bbox_centroid()</a></code> </p>
+        </td>
+        <td><p>Get the great-circle centroid for a given bounding box.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -319,7 +369,7 @@ functions.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
