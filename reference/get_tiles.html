@@ -258,7 +258,7 @@ data). To download files in different formats, use <a href='hit_national_map_api
 <span class='op'>)</span>
 
 <span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_coord_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lat</span>, lng <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lng</span><span class='op'>)</span>
-<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'>add_bbox_buffer</span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='addbuff.html'>add_bbox_buffer</a></span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fl'>100</span><span class='op'>)</span>
 <span class='fu'>get_tiles</span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 
