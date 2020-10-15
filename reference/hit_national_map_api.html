@@ -154,8 +154,8 @@ National Map, see <a href='https://viewer.nationalmap.gov/services/'>https://vie
 
     <pre class="usage"><span class='fu'>hit_national_map_api</span><span class='op'>(</span>
   <span class='va'>bbox</span>,
-  <span class='va'>img.width</span>,
-  <span class='va'>img.height</span>,
+  <span class='va'>img_width</span>,
+  <span class='va'>img_height</span>,
   <span class='va'>service</span>,
   verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
@@ -169,11 +169,11 @@ National Map, see <a href='https://viewer.nationalmap.gov/services/'>https://vie
       <td><p>The bounding box (bottom left and top left coordinate pairs)</p></td>
     </tr>
     <tr>
-      <th>img.width</th>
+      <th>img_width</th>
       <td><p>The number of pixels in the x direction to retrieve</p></td>
     </tr>
     <tr>
-      <th>img.height</th>
+      <th>img_height</th>
       <td><p>The number of pixels in the y direction to retrieve</p></td>
     </tr>
     <tr>
@@ -234,8 +234,8 @@ Map API.</p>
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='fl'>44.10438</span>, lng <span class='op'>=</span> <span class='op'>-</span><span class='fl'>74.01231</span><span class='op'>)</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='fl'>44.17633</span>, lng <span class='op'>=</span> <span class='op'>-</span><span class='fl'>73.91224</span><span class='op'>)</span>
   <span class='op'>)</span>,
-  img.width <span class='op'>=</span> <span class='fl'>8000</span>,
-  img.height <span class='op'>=</span> <span class='fl'>8000</span>,
+  img_width <span class='op'>=</span> <span class='fl'>8000</span>,
+  img_height <span class='op'>=</span> <span class='fl'>8000</span>,
   service <span class='op'>=</span> <span class='st'>"3DEPElevation"</span>
 <span class='op'>)</span>
 <span class='op'>}</span>
