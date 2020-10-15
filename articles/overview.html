@@ -101,7 +101,7 @@
 
     
     
-<p>The goal of the terrainr package is to make it easy for users to download geospatial data from the USGS National Map API and then process that data for further analysis, or to produce tiles that can then be imported into the Unity 3D rendering engine to be used as physics objects. This vignette will walk through the core functions available in terrainr and talk about a few quirks of the National Map service and how to work around them.</p>
+<p>The goal of the terrainr package is to make it easy for users to download geospatial data for points within the United States from the USGS National Map API and then process that data for further analysis, or to produce tiles that can then be imported into the Unity 3D rendering engine to be used as physics objects. This vignette will walk through the core functions available in terrainr and talk about a few quirks of the National Map service and how to work around them.</p>
 <p>Let’s load the terrainr package to get started:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikemahoney218/terrainr">terrainr</a></span><span class="op">)</span></pre></div>
@@ -125,7 +125,7 @@
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
 <span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.11156 </span>
+<span class="co">#&gt; 39.11192 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
@@ -136,7 +136,7 @@
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
 <span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.12409 </span>
+<span class="co">#&gt; 39.12392 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
@@ -202,7 +202,7 @@
                 distance_unit <span class="op">=</span> <span class="st">"meters"</span><span class="op">)</span>,
           <span class="va">mt_elbert_bbox</span>,
           tolerance <span class="op">=</span> <span class="fl">0.00001</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></pre></div>
+<span class="co">#&gt; [1] "Attributes: &lt; Component \"bl\": Attributes: &lt; Component \"lat\": Mean relative difference: 1.229289e-05 &gt; &gt;"</span></pre></div>
 <p>Now that we’ve got our bounding box, it’s time to retrieve our data. terrainr currently supports downloading DEMs from the USGS 3D Elevation Program and orthoimages from the National Agricultural Imagery Program. These programs have slightly different APIs and different restrictions on file types and the size of image you can download at once. Rather than make you think about this, terrainr handles all the weird edges of the API requests for you, including splitting your bounding box into tiles and downloading each separately. To make multi-step processing easier, terrainr functions which deal with these tiles typically return lists of the file paths they saved your data to.</p>
 <p>For this vignette, we’ll retrieve both elevation and orthoimagery using the <code>get_tiles</code> function. We can either use the generic “elevation” and “ortho” shorthands to get our data, or we can specify “3DEPElevation” and “USGSNAIPPlus” to make sure we’re using the same specific service – the short codes aren’t guaranteed to download data from the same service between releases!</p>
 <p>One last note – all the longer-running terrainr functions can print out progress bars, if the user requests them via the <a href="https://CRAN.R-project.org/package=progressr">progressr</a> package. We’ll demonstrate that syntax here:</p>
