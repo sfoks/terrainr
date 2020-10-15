@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retrieve and Transform Data from the USGS National Map • terrainr</title>
+<title>Retrieve Data from the USGS National Map and Transform it for 3D Landscape Visualizations • terrainr</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Retrieve and Transform Data from the USGS National Map">
+<script src="pkgdown.js"></script><meta property="og:title" content="Retrieve Data from the USGS National Map and Transform it for 3D Landscape Visualizations">
 <meta property="og:description" content="Functions for the retrieval and manipulation of USGS National Map 
     data (&lt;https://viewer.nationalmap.gov/services/&gt;), enabling users to 
     download elevation and image data for areas of interest. Functions are also 
@@ -104,7 +104,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>terrainr makes it easy to identify your area of interest from point data, retrieve data for that area from the <a href="https://viewer.nationalmap.gov/services/">National Map APIs</a>, and then process that data into larger, joined images or crop it into tiles that can be imported into the Unity rendering engine.</p>
+<p>terrainr makes it easy to identify your area of interest from point data, retrieve geospatial data (including orthoimagery and DEMs) for areas of interest within the United States from the <a href="https://viewer.nationalmap.gov/services/">National Map family of APIs</a>, and then process that data into larger, joined images or crop it into tiles that can be imported into the Unity rendering engine.</p>
 <p>At the absolute simplest level, terrainr provides a convenient and consistent API to downloading data from the National Map.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikemahoney218/terrainr">terrainr</a></span><span class="op">)</span>
@@ -144,7 +144,7 @@
 <span class="co"># With about ten minutes of movie magic (loading the files into Unity), </span>
 <span class="co"># we can turn that into:</span></pre></div>
 <p><img src="reference/figures/unity-lakeside.jpg" width="100%"></p>
-<p>terrainr also includes functionality to merge and crop the files you’ve downloaded, and to resize your area of interest so you’re sure to download exactly the area you want. Additionally, the more time intensive processing steps can all be monitored via the <a href="https://github.com/HenrikBengtsson/progressr">progressr</a> package, so you’ll be more confident that your computer is still churning along and not just hung. For more information, check out <a href="https://mikemahoney218.github.io/terrainr/articles/overview.html">the introductory vignette!</a></p>
+<p>terrainr also includes functionality to merge and crop the files you’ve downloaded, and to resize your area of interest so you’re sure to download exactly the area you want. Additionally, the more time intensive processing steps can all be monitored via the <a href="https://github.com/HenrikBengtsson/progressr">progressr</a> package, so you’ll be more confident that your computer is still churning along and not just hung. For more information, check out <a href="https://mikemahoney218.github.io/terrainr/articles/overview.html">the introductory vignette</a> and <a href="https://mikemahoney218.github.io/terrainr/articles/unity_instructions.html">the guide to importing your data into Unity.</a></p>
 </div>
 <div id="available-datasets" class="section level2">
 <h2 class="hasAnchor">
@@ -156,7 +156,7 @@
 <li>
 <a href="https://services.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/MapServer">USGSNAIPPlus</a>: National Agriculture Imagery Program (NAIP) and high resolution orthoimagery (HRO).</li>
 <li>
-<a href="https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer">nhd</a>: A comprehensive set of digital spatial data that encodes information about naturally occurring and constructed bodies of surface water (lakes, ponds, and reservoirs), paths through which water flows (canals, ditches, streams, and rivers), and related entities such as point features (springs, wells, stream gages, and dams).</li>
+<a href="https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer">nhd</a>: A comprehensive set of digital spatial data that encodes information about naturally occurring and constructed bodies of surface water (lakes, ponds, and reservoirs), paths through which water flows (canals, ditches, streams, and rivers), and related entities such as point features (springs, wells, stream gauges, and dams).</li>
 <li>
 <a href="https://carto.nationalmap.gov/arcgis/rest/services/govunits/MapServer">govunits</a>: Major civil areas for the Nation, including States or Territories, counties (or equivalents), Federal and Native American areas, congressional districts, minor civil divisions, incorporated places (such as cities and towns), and unincorporated places.</li>
 <li>
@@ -184,6 +184,11 @@
 <p>If you’re planning on using <code><a href="reference/raster_to_raw_tiles.html">raster_to_raw_tiles()</a></code>, you’ll also need to install the development version of the <code>magick</code> package for the time being:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ropensci/magick"</span><span class="op">)</span></pre></div>
+</div>
+<div id="code-of-conduct" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that this package is released with a <a href="https://ropensci.org/code-of-conduct/">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
