@@ -22,6 +22,9 @@
     <loc>https://mikemahoney218.github.io/terrainr/reference/export_coord_pair.html</loc>
   </url>
   <url>
+    <loc>https://mikemahoney218.github.io/terrainr/reference/georeference_overlay.html</loc>
+  </url>
+  <url>
     <loc>https://mikemahoney218.github.io/terrainr/reference/get_bbox_centroid.html</loc>
   </url>
   <url>
@@ -59,6 +62,9 @@
   </url>
   <url>
     <loc>https://mikemahoney218.github.io/terrainr/reference/terrainr_coordinate_pair.html</loc>
+  </url>
+  <url>
+    <loc>https://mikemahoney218.github.io/terrainr/reference/vector_to_overlay.html</loc>
   </url>
   <url>
     <loc>https://mikemahoney218.github.io/terrainr/articles/overview.html</loc>

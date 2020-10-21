@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A user-friendly way to get USGS National Map data tiles for an area — get_tiles • terrainr</title>
+<title>Turn spatial vector data into an overlay for Unity — vector_to_overlay • terrainr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="A user-friendly way to get USGS National Map data tiles for an area — get_tiles" />
-<meta property="og:description" content="This function splits the area contained within a bounding box into a set of
-tiles, and retrieves data from the USGS National map for each tile." />
+<meta property="og:title" content="Turn spatial vector data into an overlay for Unity — vector_to_overlay" />
+<meta property="og:description" content="This function allows users to quickly transform any vector data into an
+image overlay, which may then be imported as a texture into Unity." />
 <meta property="og:image" content="https://mikemahoney218.github.io/terrainr/logo.png" />
 
 
@@ -136,23 +136,22 @@ tiles, and retrieves data from the USGS National map for each tile." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A user-friendly way to get USGS National Map data tiles for an area</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikemahoney218/terrainr/blob/master/R/get_tiles.R'><code>R/get_tiles.R</code></a></small>
-    <div class="hidden name"><code>get_tiles.Rd</code></div>
+    <h1>Turn spatial vector data into an overlay for Unity</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mikemahoney218/terrainr/blob/master/R/vector_to_overlay.R'><code>R/vector_to_overlay.R</code></a></small>
+    <div class="hidden name"><code>vector_to_overlay.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function splits the area contained within a bounding box into a set of
-tiles, and retrieves data from the USGS National map for each tile.</p>
+    <p>This function allows users to quickly transform any vector data into an
+image overlay, which may then be imported as a texture into Unity.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_tiles</span><span class='op'>(</span>
-  <span class='va'>bbox</span>,
-  output_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>,
-  side_length <span class='op'>=</span> <span class='cn'>NULL</span>,
-  services <span class='op'>=</span> <span class='st'>"elevation"</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  georeference <span class='op'>=</span> <span class='cn'>TRUE</span>,
+    <pre class="usage"><span class='fu'>vector_to_overlay</span><span class='op'>(</span>
+  <span class='va'>vector_data</span>,
+  <span class='va'>reference_raster</span>,
+  output_file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  target_crs <span class='op'>=</span> <span class='fl'>4326</span>,
+  transparent <span class='op'>=</span> <span class='st'>"#ffffff"</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -160,107 +159,77 @@ tiles, and retrieves data from the USGS National map for each tile.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>bbox</th>
-      <td><p>A bounding box representing the lower left and upper right corner
-of the area to retrieve a heightmap for. If not a
-<code><a href='terrainr_bounding_box.html'>terrainr_bounding_box</a></code> object, it will be coerced to one.</p></td>
+      <th>vector_data</th>
+      <td><p>The spatial vector data set to be transformed into an
+overlay image. Users may provide either an sf object or a length 1 character
+vector containing a path to a file interpretable by <a href='https://r-spatial.github.io/sf/reference/st_read.html'>sf::read_sf</a>.</p></td>
     </tr>
     <tr>
-      <th>output_prefix</th>
-      <td><p>The file prefix to use when saving tiles.</p></td>
+      <th>reference_raster</th>
+      <td><p>The raster file to produce an overlay for. The output
+overlay will have the same extent and resolution as the input raster. Users
+may provide either a Raster* object or a length 1 character
+vector containing a path to a file interpretable by <a href='https://rdrr.io/pkg/raster/man/raster.html'>raster::raster</a>.</p></td>
     </tr>
     <tr>
-      <th>side_length</th>
-      <td><p>The length, in meters, of each side of tiles to download.
-If <code>NULL</code>, defaults to the maximum side length permitted by the least
-permissive service requested.</p></td>
+      <th>output_file</th>
+      <td><p>The path to save the image overlay to. If <code>NULL</code>, saves to
+a tempfile.</p></td>
     </tr>
     <tr>
-      <th>services</th>
-      <td><p>A character vector of services to download data from. Current
-options include "3DEPElevation", "USGSNAIPPlus", and "nhd". Users can also
-use short codes to download a specific type of data without specifying the
-source; current options for short codes include "elevation" (equivalent to
-"3DEPElevation"), "ortho" (equivalent to "USGSNAIPPlus), and "hydro" ("nhd").
-Short codes are
-not guaranteed to refer to the same source across releases. Short codes are
-converted to their service name and then duplicates are removed, so any given
-source will only be queried once per tile.</p></td>
+      <th>target_crs</th>
+      <td><p>The CRS (as an EPSG integer code) to transform vector data
+into. If using raster images from <a href='get_tiles.html'>get_tiles</a>, the default of 4326 is
+typically appropriate.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>Logical: should tile retrieval functions run in verbose mode?</p></td>
-    </tr>
-    <tr>
-      <th>georeference</th>
-      <td><p>Logical: should tiles be downloaded as PNGs without
-georeferencing, or should they be downloaded as georeferenced TIFF files?
-This option does nothing when only elevation data is being downloaded.</p></td>
+      <th>transparent</th>
+      <td><p>The hex code for a color to be made transparent in the
+final image. Set to <code>FALSE</code> to not set any colors to transparent.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='hit_national_map_api.html'>hit_national_map_api</a></code>.
-These can be used to change default query parameters or as additional options
-for the National Map services. See below for more details.</p></td>
+      <td><p>Arguments passed to <code>...</code> in either <a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point</a> (for
+point vector data), <a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line</a> (for line data),
+or <a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>ggplot2::geom_polygon</a> (for all other data types).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of the same length as the number of unique services requested,
-containing named vectors of where data files were saved to. Returned
-invisibly.</p>
-    <h2 class="hasAnchor" id="available-datasources"><a class="anchor" href="#available-datasources"></a>Available Datasources</h2>
-
-    
-
-<p>The following services are currently available
-(with short codes in parentheses where applicable). See links for API
-documentation.</p><ul>
-<li><p><a href='https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer'>3DEPElevation</a>
-(short code: elevation)</p></li>
-<li><p><a href='https://services.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/MapServer'>USGSNAIPPlus</a>
-(short code: ortho)</p></li>
-<li><p><a href='https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer'>nhd</a>
-(short code: hydro)</p></li>
-<li><p><a href='https://carto.nationalmap.gov/arcgis/rest/services/govunits/MapServer'>govunits</a></p></li>
-<li><p><a href='https://carto.nationalmap.gov/arcgis/rest/services/contours/MapServer'>contours</a></p></li>
-<li><p><a href='https://carto.nationalmap.gov/arcgis/rest/services/geonames/MapServer'>geonames</a></p></li>
-<li><p><a href='https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer'>NHDPlus_HR</a></p></li>
-<li><p><a href='https://carto.nationalmap.gov/arcgis/rest/services/structures/MapServer'>structures</a></p></li>
-<li><p><a href='https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer'>transportation</a></p></li>
-<li><p><a href='https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer'>wbd</a>
-("short code": watersheds)</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="additional-arguments"><a class="anchor" href="#additional-arguments"></a>Additional Arguments</h2>
-
-    
-
-<p>The <code>...</code> argument can be used to pass additional arguments to the
-National Map API or to edit the hard-coded defaults used by this function.
-More information on common arguments to change can be found in
-<a href='hit_national_map_api.html'>hit_national_map_api</a>. Note that <code>...</code> can also be used to change
-the formats returned by the server, but that doing so while using this
-function will likely cause the function to error (or corrupt the output
-data). To download files in different formats, use <a href='hit_national_map_api.html'>hit_national_map_api</a>.</p>
+    <p><code>output_file</code>, invisibly.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other data retrieval functions: 
-<code><a href='hit_national_map_api.html'>hit_national_map_api</a>()</code></p></div>
+    <div class='dont-index'><p>Other data manipulation functions: 
+<code><a href='georeference_overlay.html'>georeference_overlay</a>()</code>,
+<code><a href='merge_rasters.html'>merge_rasters</a>()</code>,
+<code><a href='raster_to_raw_tiles.html'>raster_to_raw_tiles</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+
+<span class='co'># Generate points to download raster tiles for</span>
 <span class='va'>simulated_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
   id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>100</span>, <span class='fl'>1</span><span class='op'>)</span>,
   lat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>44.04905</span>, <span class='fl'>44.17609</span><span class='op'>)</span>,
   lng <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='op'>-</span><span class='fl'>74.01188</span>, <span class='op'>-</span><span class='fl'>73.83493</span><span class='op'>)</span>
 <span class='op'>)</span>
 
+<span class='co'># Download raster tiles and merge them into a single raster</span>
 <span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_coord_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lat</span>, lng <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lng</span><span class='op'>)</span>
 <span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='addbuff.html'>add_bbox_buffer</a></span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fl'>100</span><span class='op'>)</span>
-<span class='fu'>get_tiles</span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>downloaded_tiles</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_tiles.html'>get_tiles</a></span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>merged_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='merge_rasters.html'>merge_rasters</a></span><span class='op'>(</span><span class='va'>downloaded_tiles</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>,
+                             <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".tif"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Create an sf object from our original simulated data</span>
+<span class='va'>simulated_data_sf</span> <span class='op'>&lt;-</span> <span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_as_sf.html'>st_as_sf</a></span><span class='op'>(</span><span class='va'>simulated_data</span>, coords <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lng"</span>, <span class='st'>"lat"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>st_crs</a></span><span class='op'>(</span><span class='va'>simulated_data_sf</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>st_crs</a></span><span class='op'>(</span><span class='fl'>4326</span><span class='op'>)</span>
+
+<span class='co'># Create an overlay image</span>
+<span class='fu'>vector_to_overlay</span><span class='op'>(</span><span class='va'>simulated_data_sf</span>, <span class='va'>merged_file</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 
 </div></pre>
   </div>

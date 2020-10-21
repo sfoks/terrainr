@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">terrainr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -138,16 +138,41 @@
       <small>Source: <a href='https://github.com/mikemahoney218/terrainr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="terrainr-0109001" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0.9001">
+<a href="#terrainr-0109001" class="anchor"></a>terrainr 0.1.0.9001</h1>
+<ul>
+<li>Breaking changes:
+<ul>
+<li>
+<code>merge_rasters</code> loses the argument <code>merge_raster</code>. For the “georeference a single image” use case, see the new <code>georeference_overlay</code> function.</li>
+</ul>
+</li>
+<li>New features:
+<ul>
+<li>
+<code>vector_to_overlay</code> lets users quickly produce image overlays from vector data.</li>
+<li>
+<code>georeference_overlay</code> replaces the use of merge_raster for creating single-file georeferenced overlay files.</li>
+</ul>
+</li>
+<li>Internal changes:
+<ul>
+<li>All terrainr-provided functions now explicitly use the terrainr:: namespace.</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="terrainr-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
 <a href="#terrainr-010" class="anchor"></a>terrainr 0.1.0</h1>
 <ul>
-<li>First version (to be) submitted to ROpenSci</li>
 <li>New features:
 <ul>
 <li>set_bbox_side_length wraps add_bbox_buffer to set each side of the bounding box to an equal length (within ~1% accuracy)</li>
 </ul>
 </li>
+<li>First version released on GitHub</li>
 </ul>
 </div>
     <div id="terrainr-0009001" class="section level1">
