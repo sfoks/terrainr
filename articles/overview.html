@@ -125,19 +125,19 @@
 <span class="co">#&gt; Slot "bl":</span>
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
-<span class="co">#&gt;     lat </span>
-<span class="co">#&gt; 39.1118 </span>
+<span class="co">#&gt;      lat </span>
+<span class="co">#&gt; 39.11173 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
-<span class="co">#&gt; -106.4534 </span>
+<span class="co">#&gt; -106.4532 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "tr":</span>
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
 <span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.12411 </span>
+<span class="co">#&gt; 39.12398 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
@@ -236,10 +236,25 @@
                                   output_raster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">ortho_merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_rasters.html">merge_rasters</a></span><span class="op">(</span>input_rasters <span class="op">=</span> <span class="va">output_files</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,
                               output_raster <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span><span class="op">)</span></pre></div>
-<p>Now, one other feature of <code>merge_rasters</code> is the ability to create georeferenced rasters from non-georeferenced images. This means that you can turn any image into an overlay for your output maps, so long as you’ve stored it as a PNG – just pass a vector of image files that correspond to the vector of rasters you’re merging to <code>input_images</code> and specify an output file.</p>
-<p>This produces two tiles: one merged elevation map and one merged orthoimage, both written out as georeferenced TIFFs. <code>merge_rasters</code> doesn’t actually care if you want to merge files, though – as we saw here, if our goal is just to georeference an image file, we can provide length 1 vectors to both input arguments. This can be combined with <code>mapply</code> to georeference all the tiles downloaded by <code>get_tiles</code> without merging any.</p>
-<p>The last major function provided by terrainr is <code>raster_to_raw_tiles</code>, which is designed to turn these larger rasters into tiles that can be imported into the Unity 3D rendering engine. The specifics of working with Unity is outside of the scope of this overview vignette, other than to demonstrate the main way I call <code>raster_to_raw_tiles</code>:</p>
+<p><code>merge_rasters</code> can also be used to georeference multiple images based on reference rasters – so if you produce overlays for each tile you download, you can quickly and easily turn them into a single merged overlay. If you only have a single file to georeference (or don’t want to merge the outputs), check out the <code>terrainr</code> function <code>georeference_overlay</code>.</p>
+<p>This can be particularly useful when producing overlay images from external data. Users are able to provide their own imagery (given it is of the same extent and resolution as the raster map) to be georeferenced and used as an overlay, or quickly produce images from vector data (in any format that can be read by the <code>sf</code> package) using the <code>vector_to_overlay</code> function:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="va">mt_elbert_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="va">mt_elbert_points</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lng"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">mt_elbert_sf</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span>
+<span class="va">mt_elbert_overlay</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vector_to_overlay.html">vector_to_overlay</a></span><span class="op">(</span><span class="va">mt_elbert_sf</span>,
+                                       <span class="va">elevation_merged</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,
+                                       size <span class="op">=</span> <span class="fl">15</span>,
+                                       color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="va">mt_elbert_overlay</span><span class="op">)</span></pre></div>
+<p><img src="mt_elbert_overlay.png" width="690"></p>
+<p>These overlays may be stacked on top of one another or downloaded imagery using the <code>combine_overlays</code> function:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="va">ortho_with_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/combine_overlays.html">combine_overlays</a></span><span class="op">(</span><span class="va">ortho_merged</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,
+                                      <span class="va">mt_elbert_overlay</span><span class="op">)</span>
+<span class="va">ortho_with_points</span></pre></div>
+<p><img src="combined_overlay.png" width="680"></p>
+<p>The last major function provided by terrainr is <code>raster_to_raw_tiles</code>, which is designed to turn these larger rasters into tiles that can be imported into the Unity 3D rendering engine. The specifics of working with Unity is outside of the scope of this overview vignette, other than to demonstrate the main way I call <code>raster_to_raw_tiles</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="va">side_length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">vapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">elevation_merged</span>, <span class="va">ortho_merged</span><span class="op">)</span>, 
                       <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, 
                       <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>

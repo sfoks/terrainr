@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Crop a raster and convert the output tiles into new formats. — raster_to_raw_tiles • terrainr</title>
+<title>Combine multiple image overlays into a single file — combine_overlays • terrainr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Crop a raster and convert the output tiles into new formats. — raster_to_raw_tiles" />
-<meta property="og:description" content="This function crops input raster files into smaller square tiles and then
-converts them into either .png or .raw files which are ready to be imported
-into the Unity game engine." />
+<meta property="og:title" content="Combine multiple image overlays into a single file — combine_overlays" />
+<meta property="og:description" content="This function combines any number of images into a single file, which may
+then be further processed as an image or transformed into an image overlay." />
 <meta property="og:image" content="https://mikemahoney218.github.io/terrainr/logo.png" />
 
 
@@ -137,69 +136,53 @@ into the Unity game engine." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Crop a raster and convert the output tiles into new formats.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mikemahoney218/terrainr/blob/master/R/raster_to_raw_tiles.R'><code>R/raster_to_raw_tiles.R</code></a></small>
-    <div class="hidden name"><code>raster_to_raw_tiles.Rd</code></div>
+    <h1>Combine multiple image overlays into a single file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mikemahoney218/terrainr/blob/master/R/combine_overlays.R'><code>R/combine_overlays.R</code></a></small>
+    <div class="hidden name"><code>combine_overlays.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function crops input raster files into smaller square tiles and then
-converts them into either .png or .raw files which are ready to be imported
-into the Unity game engine.</p>
+    <p>This function combines any number of images into a single file, which may
+then be further processed as an image or transformed into an image overlay.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raster_to_raw_tiles</span><span class='op'>(</span><span class='va'>input_file</span>, <span class='va'>output_prefix</span>, side_length <span class='op'>=</span> <span class='fl'>4097</span>, raw <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>combine_overlays</span><span class='op'>(</span><span class='va'>...</span>, output_file <span class='op'>=</span> <span class='cn'>NULL</span>, transparency <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input_file</th>
-      <td><p>File path to the input TIFF file to convert.</p></td>
+      <th>...</th>
+      <td><p>File paths for images to be combined. Note that combining TIFF
+images requires the <code>tiff</code> package be installed.</p></td>
     </tr>
     <tr>
-      <th>output_prefix</th>
-      <td><p>The file path to prefix output tiles with.</p></td>
+      <th>output_file</th>
+      <td><p>Optionally, the path to save the resulting image to. Can
+be any format accepted by <a href='https://docs.ropensci.org/magick/reference/editing.html'>magick::image_read</a>.</p></td>
     </tr>
     <tr>
-      <th>side_length</th>
-      <td><p>The side length, in pixels, for the .raw tiles.</p></td>
-    </tr>
-    <tr>
-      <th>raw</th>
-      <td><p>Logical: Convert the cropped tiles to .raw? When <code>FALSE</code>
-returns a .png.</p></td>
+      <th>transparency</th>
+      <td></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisibly, a character vector containing the file paths that were
-written to.</p>
+    <p>The combined image as a <code>magick-image</code> object, returned invisibly.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other data manipulation functions: 
-<code><a href='combine_overlays.html'>combine_overlays</a>()</code>,
 <code><a href='georeference_overlay.html'>georeference_overlay</a>()</code>,
 <code><a href='merge_rasters.html'>merge_rasters</a>()</code>,
+<code><a href='raster_to_raw_tiles.html'>raster_to_raw_tiles</a>()</code>,
+<code><a href='vector_to_overlay.html'>vector_to_overlay</a>()</code></p>
+<p>Other overlay creation functions: 
+<code><a href='georeference_overlay.html'>georeference_overlay</a>()</code>,
 <code><a href='vector_to_overlay.html'>vector_to_overlay</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>simulated_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>100</span>, <span class='fl'>1</span><span class='op'>)</span>,
-  lat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>44.04905</span>, <span class='fl'>44.17609</span><span class='op'>)</span>,
-  lng <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='op'>-</span><span class='fl'>74.01188</span>, <span class='op'>-</span><span class='fl'>73.83493</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_coord_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lat</span>, lng <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lng</span><span class='op'>)</span>
-<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='addbuff.html'>add_bbox_buffer</a></span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>output_files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_tiles.html'>get_tiles</a></span><span class='op'>(</span><span class='va'>bbox</span><span class='op'>)</span>
-<span class='va'>temptiff</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".tif"</span><span class='op'>)</span>
-<span class='fu'><a href='merge_rasters.html'>merge_rasters</a></span><span class='op'>(</span><span class='va'>output_files</span><span class='op'>[</span><span class='st'>"3DEPElevation"</span><span class='op'>]</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>temptiff</span><span class='op'>)</span>
-<span class='fu'>raster_to_raw_tiles</span><span class='op'>(</span><span class='va'>temptiff</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
