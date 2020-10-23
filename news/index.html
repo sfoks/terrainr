@@ -162,9 +162,27 @@
 </li>
 </ul>
 </li>
+<li>Improvements and bug fixes:
+<ul>
+<li>
+<code>get_tiles</code>, <code>raster_to_raw_tiles</code>, and <code>merge_rasters</code> are now much more conscientious about deleting tempfiles when they’re done with them.</li>
+<li>
+<code>merge_rasters</code> no longer fails when handed a mix of 3- and 4-band raster files. The current implementation will cast all 4 band rasters to 3 band images and then return a 3 band raster image.</li>
+</ul>
+</li>
 <li>Internal changes:
 <ul>
 <li>All terrainr-provided functions now explicitly use the terrainr:: namespace.</li>
+</ul>
+</li>
+<li>Changes in dependencies:
+<ul>
+<li>
+<code>sf</code> has been added as an explicit import due to <code>vector_to_overlay</code>. <code>sf</code> is required by <code>gdalUtilities</code>, also imported by this package, so this change should have no impact on users.</li>
+<li>
+<code>ggplot2</code> has been added to <code>Suggests</code> due to <code>vector_to_overlay</code>.</li>
+<li>
+<code>jpeg</code> and <code>tiff</code> have been added to <code>Suggests</code> due to <code>georeference_overlay</code>. I’d expect more image libraries to join this list over time.</li>
 </ul>
 </li>
 </ul>
