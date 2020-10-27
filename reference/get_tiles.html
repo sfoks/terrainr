@@ -150,6 +150,7 @@ tiles, and retrieves data from the USGS National map for each tile.</p>
   <span class='va'>bbox</span>,
   output_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>,
   side_length <span class='op'>=</span> <span class='cn'>NULL</span>,
+  resolution <span class='op'>=</span> <span class='fl'>1</span>,
   services <span class='op'>=</span> <span class='st'>"elevation"</span>,
   verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
   georeference <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -174,6 +175,12 @@ of the area to retrieve a heightmap for. If not a
       <td><p>The length, in meters, of each side of tiles to download.
 If <code>NULL</code>, defaults to the maximum side length permitted by the least
 permissive service requested.</p></td>
+    </tr>
+    <tr>
+      <th>resolution</th>
+      <td><p>How many meters are represented by each pixel? The default
+value of 1 means that 1 pixel = 1 meter, while a value of 2 means that
+1 pixel = 2 meters, and so on.</p></td>
     </tr>
     <tr>
       <th>services</th>

@@ -146,6 +146,8 @@
 <ul>
 <li>
 <code>merge_rasters</code> loses the argument <code>merge_raster</code>. For the “georeference a single image” use case, see the new <code>georeference_overlay</code> function.</li>
+<li>
+<code>get_tiles</code> gains an argument <code>resolution</code> (details below) between <code>side_length</code> and <code>services</code>. No functionality should be changed, but code with unnamed arguments to <code>services</code>, <code>verbose</code>, or <code>georeference</code> may be impacted.</li>
 </ul>
 </li>
 <li>New features:
@@ -160,6 +162,8 @@
 <code>combine_overlays</code> lets users, well, combine overlays into a single image</li>
 </ul>
 </li>
+<li>
+<code>get_tiles</code> gains an argument, <code>resolution</code>, specifying the number of meters each pixel should represent (so higher images result in smaller downloads).</li>
 </ul>
 </li>
 <li>Improvements and bug fixes:
@@ -168,6 +172,7 @@
 <code>get_tiles</code>, <code>raster_to_raw_tiles</code>, and <code>merge_rasters</code> are now much more conscientious about deleting tempfiles when they’re done with them.</li>
 <li>
 <code>merge_rasters</code> no longer fails when handed a mix of 3- and 4-band raster files. The current implementation will cast all 4 band rasters to 3 band images and then return a 3 band raster image.</li>
+<li>The <code>output_image</code> argument to <code>merge_rasters</code> now has a default value of <code><a href="https://rdrr.io/r/base/tempfile.html">tempfile(fileext = ".tif")</a></code> to be a little more friendly to users.</li>
 </ul>
 </li>
 <li>Internal changes:
