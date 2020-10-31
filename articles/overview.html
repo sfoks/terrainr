@@ -125,19 +125,19 @@
 <span class="co">#&gt; Slot "bl":</span>
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
-<span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.11165 </span>
+<span class="co">#&gt;    lat </span>
+<span class="co">#&gt; 39.112 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
-<span class="co">#&gt; -106.4534 </span>
+<span class="co">#&gt; -106.4533 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "tr":</span>
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
 <span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.12395 </span>
+<span class="co">#&gt; 39.12405 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;      lng </span>
@@ -203,7 +203,7 @@
                 distance_unit <span class="op">=</span> <span class="st">"meters"</span><span class="op">)</span>,
           <span class="va">mt_elbert_bbox</span>,
           tolerance <span class="op">=</span> <span class="fl">0.00001</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></pre></div>
+<span class="co">#&gt; [1] "Attributes: &lt; Component \"bl\": Attributes: &lt; Component \"lat\": Mean relative difference: 1.438749e-05 &gt; &gt;"</span></pre></div>
 <p>Now that we’ve got our bounding box, it’s time to retrieve our data. terrainr currently supports downloading DEMs from the USGS 3D Elevation Program and orthoimages from the National Agricultural Imagery Program. These programs have slightly different APIs and different restrictions on file types and the size of image you can download at once. Rather than make you think about this, terrainr handles all the weird edges of the API requests for you, including splitting your bounding box into tiles and downloading each separately. To make multi-step processing easier, terrainr functions which deal with these tiles typically return lists of the file paths they saved your data to.</p>
 <p>For this vignette, we’ll retrieve both elevation and orthoimagery using the <code>get_tiles</code> function. We can either use the generic “elevation” and “ortho” shorthands to get our data, or we can specify “3DEPElevation” and “USGSNAIPPlus” to make sure we’re using the same specific service – the short codes aren’t guaranteed to download data from the same service between releases!</p>
 <p>One last note – all the longer-running terrainr functions can print out progress bars, if the user requests them via the <a href="https://CRAN.R-project.org/package=progressr">progressr</a> package. We’ll demonstrate that syntax here:</p>
