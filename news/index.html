@@ -164,6 +164,9 @@
 </li>
 <li>
 <code>get_tiles</code> gains an argument, <code>resolution</code>, specifying the number of meters each pixel should represent (so higher images result in smaller downloads).</li>
+<li>
+<code>get_bbox</code> provides an S3 generic to create <code>terrainr_bounding_box</code> objects. In this version, that means users can use <code>get_bbox</code> to get bounding boxes from <code>sf</code> objects, and it means adding methods will be easier going forward. Using <code>get_bbox</code> with non-sf objects is equivalent to <code>get_coord_bbox</code>
+</li>
 </ul>
 </li>
 <li>Improvements and bug fixes:
@@ -173,6 +176,7 @@
 <li>
 <code>merge_rasters</code> no longer fails when handed a mix of 3- and 4-band raster files. The current implementation will cast all 4 band rasters to 3 band images and then return a 3 band raster image.</li>
 <li>The <code>output_image</code> argument to <code>merge_rasters</code> now has a default value of <code><a href="https://rdrr.io/r/base/tempfile.html">tempfile(fileext = ".tif")</a></code> to be a little more friendly to users.</li>
+<li>Arguments <code>lat</code> and <code>lng</code> to <code>get_bbox</code> (and <code>get_coord_bbox</code>) no longer need to be quoted – either the tidyverse-feeling NSE approach or the more standard quoted argument approach will work.</li>
 </ul>
 </li>
 <li>Internal changes:
@@ -184,6 +188,8 @@
 <ul>
 <li>
 <code>sf</code> has been added as an explicit import due to <code>vector_to_overlay</code>. <code>sf</code> is required by <code>gdalUtilities</code>, also imported by this package, so this change should have no impact on users.</li>
+<li>
+<code>rlang</code> is added as a dependency to allow <code>lat</code> and <code>lng</code> be unquoted in <code>get_bbox</code>.</li>
 <li>
 <code>ggplot2</code> has been added to <code>Suggests</code> due to <code>vector_to_overlay</code>.</li>
 <li>
