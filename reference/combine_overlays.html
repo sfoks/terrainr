@@ -146,7 +146,11 @@ then be further processed as an image or transformed into an image overlay." />
 then be further processed as an image or transformed into an image overlay.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>combine_overlays</span><span class='op'>(</span><span class='va'>...</span>, output_file <span class='op'>=</span> <span class='cn'>NULL</span>, transparency <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>combine_overlays</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  output_file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>".png"</span><span class='op'>)</span>,
+  transparency <span class='op'>=</span> <span class='fl'>0</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +178,8 @@ additional transparency.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>output_file</code>, invisibly.</p>
+    <p>If <code>output_file</code> is not null, <code>output_file</code>, invisibly. If
+<code>output_file</code> is null, a <code>magick</code> image object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other data manipulation functions: 
@@ -194,7 +199,7 @@ additional transparency.</p></td>
   lng <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, min <span class='op'>=</span> <span class='op'>-</span><span class='fl'>106.4534</span>, max <span class='op'>=</span> <span class='op'>-</span><span class='fl'>106.437</span><span class='op'>)</span>
 <span class='op'>)</span>
 
-<span class='va'>mt_elbert_bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_coord_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>
+<span class='va'>mt_elbert_bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>
   data <span class='op'>=</span> <span class='va'>mt_elbert_points</span>,
   lat <span class='op'>=</span> <span class='st'>"lat"</span>,
   lng <span class='op'>=</span> <span class='st'>"lng"</span>

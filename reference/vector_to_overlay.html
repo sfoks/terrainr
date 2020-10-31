@@ -220,7 +220,7 @@ or <a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>ggplot2::
   lng <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='op'>-</span><span class='fl'>73.92273</span>, <span class='op'>-</span><span class='fl'>73.92147</span><span class='op'>)</span>
 <span class='op'>)</span>
 <span class='co'># Download raster tiles and merge them into a single raster</span>
-<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_coord_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lat</span>, lng <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lng</span><span class='op'>)</span>
+<span class='va'>bbox</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_bbox.html'>get_coord_bbox</a></span><span class='op'>(</span>lat <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lat</span>, lng <span class='op'>=</span> <span class='va'>simulated_data</span><span class='op'>$</span><span class='va'>lng</span><span class='op'>)</span>
 
 <span class='va'>downloaded_tiles</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_tiles.html'>get_tiles</a></span><span class='op'>(</span><span class='va'>bbox</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
