@@ -105,7 +105,7 @@
 <p>The goal of the terrainr package is to make it easy for users to download geospatial data for points within the United States from the USGS National Map API and then process that data for further analysis, or to produce tiles that can then be imported into the Unity 3D rendering engine to be used as physics objects. This vignette will walk through the core functions available in terrainr and talk about a few quirks of the National Map service and how to work around them.</p>
 <p>Let’s load the terrainr package to get started:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikemahoney218/terrainr">terrainr</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mikemahoney218.github.io/terrainr/">terrainr</a></span><span class="op">)</span></pre></div>
 <p>We’re going to work with data for Mount Elbert today, the highest point in the Rocky Mountain range. I’m just choosing this location for the dramatic scenery; the National Map can be used to retrieve data for the entire United States and much of Canada. Let’s simulate some data for the area right around Mt. Elbert, such as the point data we might get from field data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="va">mt_elbert_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
@@ -126,7 +126,7 @@
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
 <span class="co">#&gt;      lat </span>
-<span class="co">#&gt; 39.11149 </span>
+<span class="co">#&gt; 39.11166 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
@@ -136,12 +136,12 @@
 <span class="co">#&gt; Slot "tr":</span>
 <span class="co">#&gt; An object of class "terrainr_coordinate_pair"</span>
 <span class="co">#&gt; Slot "lat":</span>
-<span class="co">#&gt;     lat </span>
-<span class="co">#&gt; 39.1241 </span>
+<span class="co">#&gt;      lat </span>
+<span class="co">#&gt; 39.12413 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "lng":</span>
 <span class="co">#&gt;       lng </span>
-<span class="co">#&gt; -106.4371</span></pre></div>
+<span class="co">#&gt; -106.4372</span></pre></div>
 <p><code>get_bbox</code> returns an S4 class (<code>terrainr_bounding_box</code>) that indicates the “bottom left” and “top right” points of the box containing all your points, which is guaranteed to work with all the functions in terrainr. However, there’s no requirement for you to go out of your way to make a <code>terrainr_bounding_box</code> object; any list object that contains the same information will work just as well with all of terrainr’s processing and data retrieval functions.</p>
 <p>We can also calculate a bounding box for our single point:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
