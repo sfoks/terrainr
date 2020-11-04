@@ -106,27 +106,27 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>terrainr makes it easy to identify your area of interest from point data, retrieve geospatial data (including orthoimagery and DEMs) for areas of interest within the United States from the <a href="https://viewer.nationalmap.gov/services/">National Map family of APIs</a>, and then process that data into larger, joined images or crop it into tiles that can be imported into the Unity rendering engine.</p>
 <p>At the absolute simplest level, terrainr provides a convenient and consistent API to downloading data from the National Map.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mikemahoney218.github.io/terrainr/">terrainr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mikemahoney218.github.io/terrainr/">terrainr</a></span><span class="op">)</span>
 <span class="va">simulated_data</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>,
                               lat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">44.04905</span>, <span class="fl">44.17609</span><span class="op">)</span>, 
                               lng <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">74.01188</span>, <span class="op">-</span><span class="fl">73.83493</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_bbox.html">get_coord_bbox</a></span><span class="op">(</span>lat <span class="op">=</span> <span class="va">simulated_data</span><span class="op">$</span><span class="va">lat</span>, lng <span class="op">=</span> <span class="va">simulated_data</span><span class="op">$</span><span class="va">lng</span><span class="op">)</span> 
 <span class="va">output_tiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_tiles.html">get_tiles</a></span><span class="op">(</span>bbox <span class="op">=</span> <span class="va">bbox</span>,
-                          services <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"elevation"</span>, <span class="st">"ortho"</span><span class="op">)</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># output_tiles is now a list of two vectors pointing to the elevation and </span>
+                          services <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"elevation"</span>, <span class="st">"ortho"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># output_tiles is now a list of two vectors pointing to the elevation and </span>
 <span class="co"># orthoimagery tiles we just downloaded -- here we're displaying the first</span>
 <span class="co"># of the ortho tiles</span>
-<span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">output_tiles</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></pre></div>
+<span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">output_tiles</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/naip.png" width="100%"></p>
 <p>Once downloaded, these images are in standard GeoTIFF or PNG formats and can be used as expected with other utilities:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>raster<span class="op">::</span><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">raster</span>(output_tiles[[<span class="dv">1</span>]][[<span class="dv">1</span>]]))elev</span></code></pre></div>
 <p><img src="reference/figures/elevation.png" width="100%"></p>
 <p>Additionally, terrainr provides functions to transform these tiles into RAW images ready to be imported into the Unity rendering engine, allowing you to fly or walk through your downloaded data sets in 3D or VR:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">merged_dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">merged_dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span>
 <span class="va">merged_ortho</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span>
 <span class="co"># we can call these vectors by name instead of position, too</span>
 <span class="fu"><a href="reference/merge_rasters.html">merge_rasters</a></span><span class="op">(</span><span class="va">output_tiles</span><span class="op">$</span><span class="va">`3DEPElevation`</span>, 
@@ -142,7 +142,7 @@
        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># With about ten minutes of movie magic (loading the files into Unity), </span>
-<span class="co"># we can turn that into:</span></pre></div>
+<span class="co"># we can turn that into:</span></code></pre></div>
 <p><img src="reference/figures/unity-lakeside.jpg" width="100%"></p>
 <p>terrainr also includes functionality to merge and crop the files you’ve downloaded, and to resize your area of interest so you’re sure to download exactly the area you want. Additionally, the more time intensive processing steps can all be monitored via the <a href="https://github.com/HenrikBengtsson/progressr">progressr</a> package, so you’ll be more confident that your computer is still churning along and not just hung. For more information, check out <a href="https://mikemahoney218.github.io/terrainr/articles/overview.html">the introductory vignette</a> and <a href="https://mikemahoney218.github.io/terrainr/articles/unity_instructions.html">the guide to importing your data into Unity.</a></p>
 </div>
@@ -178,9 +178,9 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version of terrainr from <a href="https://github.com/mikemahoney218/terrainr">GitHub</a> with:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mikemahoney218/terrainr"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mikemahoney218/terrainr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">

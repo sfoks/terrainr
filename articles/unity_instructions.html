@@ -88,8 +88,7 @@
 
       
 
-      </header><script src="unity_instructions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="unity_instructions_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="unity_instructions_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="unity_instructions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Importing terrainr tiles into Unity</h1>
@@ -104,8 +103,8 @@
     
 <p>One of the key functions of terrainr is <code>raster_to_raw_tiles</code>, which takes TIFF files and converts them into formats that can be used to create interactive landscape visualizations in the <a href="https://unity.com/">Unity rendering engine</a>. This tutorial assumes you have already downloaded Unity.</p>
 <p>This is the entirety of the R code that we’ll be running today; most of this tutorial will be focusing on using Unity. If you aren’t familiar with the functions being used in this chunk, check out the <a href="https://mikemahoney218.github.io/terrainr/articles/overview.html">introductory vignette!</a></p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mikemahoney218.github.io/terrainr/">terrainr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mikemahoney218.github.io/terrainr/">terrainr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magrittr</span><span class="op">)</span>
 
 <span class="co"># This will get us data for a 16 km2 area centered on Mt. Marcy,</span>
@@ -127,7 +126,7 @@
                                           side_length <span class="op">=</span> <span class="fl">4097</span>, 
                                           raw <span class="op">=</span> <span class="va">y</span><span class="op">)</span>,
        <span class="va">merged_outputs</span>,
-       <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></pre></div>
+       <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The one thing I’ll point out in the code is that we’re providing two sets of arguments to each of our <code>raster_to_raw_tiles</code> runs: first we provide a heightmap with the argument <code>raw = TRUE</code>, then we rerun the function with our orthoimage and <code>raw = FALSE</code>. The reason here is that we’ll import these objects into Unity differently, so they need to be saved out in different file formats.</p>
 <p>Once that code finishes running, you should have about this many files:</p>
 <p><img src="files.jpg" width="759"></p>
