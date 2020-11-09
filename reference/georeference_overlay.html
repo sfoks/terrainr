@@ -150,7 +150,7 @@ georeference multiple images and merge them into a single file, see
 <a href='merge_rasters.html'>merge_rasters</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>georeference_overlay</span><span class='op'>(</span><span class='va'>overlay_file</span>, <span class='va'>output_file</span>, <span class='va'>reference_raster</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>georeference_overlay</span><span class='op'>(</span><span class='va'>overlay_file</span>, <span class='va'>reference_raster</span>, <span class='va'>output_file</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,16 +162,16 @@ detected automatically from file extension; options include <code>jpeg/jpg</code
 <code>png</code>, and <code>tif/tiff</code>.</p></td>
     </tr>
     <tr>
-      <th>output_file</th>
-      <td><p>The path to write the georeferenced image file to. Must
-be a TIFF.</p></td>
-    </tr>
-    <tr>
       <th>reference_raster</th>
       <td><p>The raster file to base georeferencing on. The output
 image will have the same extent and CRS as the reference raster. Accepts both
 Raster* objects from the <code>raster</code> package or a file readable by
 <a href='https://rdrr.io/pkg/raster/man/raster.html'>raster::raster</a>.</p></td>
+    </tr>
+    <tr>
+      <th>output_file</th>
+      <td><p>The path to write the georeferenced image file to. Must
+be a TIFF.</p></td>
     </tr>
     </table>
 
