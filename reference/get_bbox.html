@@ -159,6 +159,9 @@ latitude or longitude, this function will buffer it in both directions by
 <span class='co'># S3 method for sf</span>
 <span class='fu'>get_bbox</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>lat</span>, <span class='va'>lng</span>, <span class='va'>na.rm</span><span class='op'>)</span>
 
+<span class='co'># S3 method for RasterLayer</span>
+<span class='fu'>get_bbox</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>lat</span>, <span class='va'>lng</span>, <span class='va'>na.rm</span><span class='op'>)</span>
+
 <span class='fu'>get_coord_bbox</span><span class='op'>(</span>data <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>lat</span>, <span class='va'>lng</span>, na.rm <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
@@ -169,18 +172,19 @@ latitude or longitude, this function will buffer it in both directions by
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>An object of class <code>sf</code> (see <a href='https://r-spatial.github.io/sf/reference/sf.html'>sf::st_sf</a>), a dataframe containing
-latitude and longitude values, or <code>NULL</code>.</p></td>
+      <td><p>An object of class <code>sf</code> (see <a href='https://r-spatial.github.io/sf/reference/sf.html'>sf::st_sf</a>), an object of class
+<code>RasterLayer</code> (see <a href='https://rdrr.io/pkg/raster/man/raster.html'>raster::raster</a>), a data frame containing latitude and
+longitude values, or <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>lat</th>
-      <td><p>If <code>data</code> is not <code>NULL</code> or an <code>sf</code> object, the name of
+      <td><p>If <code>data</code> is a data frame, the name of
 the column containing latitude values. If <code>data</code> is <code>NULL</code>, a
 vector of latitude values.</p></td>
     </tr>
     <tr>
       <th>lng</th>
-      <td><p>If <code>data</code> is not <code>NULL</code> or an <code>sf</code> object, the name of
+      <td><p>If <code>data</code> is a data frame, the name of
 the column containing longitude values. If <code>data</code> is <code>NULL</code>, a
 vector of longitude values.</p></td>
     </tr>

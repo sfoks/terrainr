@@ -142,6 +142,7 @@
 <h1 class="page-header" data-toc-text="0.1.0.9001">
 <a href="#terrainr-0109001" class="anchor"></a>terrainr 0.1.0.9001</h1>
 <ul>
+<li>This version will be released as 0.2.0</li>
 <li>Breaking changes:
 <ul>
 <li>
@@ -165,7 +166,7 @@
 <li>
 <code>get_tiles</code> gains an argument, <code>resolution</code>, specifying the number of meters each pixel should represent (so higher images result in smaller downloads).</li>
 <li>
-<code>get_bbox</code> provides an S3 generic to create <code>terrainr_bounding_box</code> objects. In this version, that means users can use <code>get_bbox</code> to get bounding boxes from <code>sf</code> objects, and it means adding methods will be easier going forward. Using <code>get_bbox</code> with non-sf objects is equivalent to <code>get_coord_bbox</code>
+<code>get_bbox</code> provides an S3 generic to create <code>terrainr_bounding_box</code> objects. In this version, that means users can use <code>get_bbox</code> to get bounding boxes from <code>sf</code> and <code>RasterLayer</code> objects, and it means adding methods will be easier going forward. The generic <code>get_bbox</code> method is equivalent to <code>get_coord_bbox</code>
 </li>
 <li>
 <code>raster_to_raw_tiles</code> handles rectangles appropriately</li>
